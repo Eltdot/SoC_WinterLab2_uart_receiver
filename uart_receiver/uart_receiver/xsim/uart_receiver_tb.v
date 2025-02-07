@@ -72,7 +72,7 @@ end
 integer k;
 task send_uartrx (input reg [9:0] pattern_in);
   begin
-    for(k = 9; k >= 0; k = k - 1) begin
+    for (k = 9; k >= 0; k = k - 1) begin
       @(posedge baud_rate_signal);
       uart_rx = pattern_in[k];
     end
@@ -93,7 +93,7 @@ initial begin
   wait(rst == 1);
   wait(rst == 0);
 
-  for(i=0; i<N; i=i+1) begin
+  for (i=0; i<N; i=i+1) begin
     @(negedge clk_in);
       signal_in = golden[i][18:9];
       correct_data = golden[i][8:1];
@@ -101,7 +101,7 @@ initial begin
       send_uartrx(signal_in);
       #(CYCLE + CYCLE / 2); 
       debug = ~debug;
-      if({data, valid_data} !== {correct_data, correct_valid}) begin
+      if ({data, valid_data} !== {correct_data, correct_valid}) begin
         error = error + 1;
         $display("************* Pattern No.%d is wrong at %t ************", i,$time);
         $display("uart_rx = %b, correct data and correct valid_data is %b and %b,", signal_in, correct_data, correct_valid);
@@ -112,7 +112,7 @@ initial begin
 
   $fclose(fp_w);
 
-  if(error == 0) begin
+  if (error == 0) begin
     $display("Congratulations!! The functionality of your uart_receiver is correct!!");
   end
   else begin

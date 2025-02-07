@@ -1,3 +1,0 @@
-./uart_receiver_tb.v
-./../hdl/baud_rate_generator.v
-./../hdl/uart_receiver.v
